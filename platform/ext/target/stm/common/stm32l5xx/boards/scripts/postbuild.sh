@@ -32,7 +32,7 @@ regressionsh=$projectdir/regression.sh
 updatesh=$projectdir/TFM_UPDATE.sh
 bin2hexsh=$projectdir/TFM_BIN2HEX.sh
 basedir=$projectdir
-echo preprocess bl2 file
+echo Start STM32 script to update flashing scripts
 preprocess $projectdir $bl2_file_to_preprocess $preprocess_bl2_file $compiler_full_path
 stm_tool=$basedir"/scripts/stm_tool.py"
 #determine/check python version command
@@ -81,7 +81,6 @@ echo $command
 exit 1
 fi
 
-echo $updatebat" updated"
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b slot1 -m  RE_IMAGE_FLASH_ADDRESS_NON_SECURE -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -90,7 +89,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b slot2 -m  RE_IMAGE_FLASH_SECURE_UPDATE -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -99,7 +98,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b slot3 -m  RE_IMAGE_FLASH_NON_SECURE_UPDATE -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -108,7 +107,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b scratch -m  RE_IMAGE_FLASH_SCRATCH -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -117,7 +116,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b nvcounter -m  RE_IMAGE_FLASH_NV_COUNTERS -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -126,7 +125,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b sst -m  RE_IMAGE_FLASH_NV_PS -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -135,7 +134,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b its -m  RE_IMAGE_FLASH_NV_ITS -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -144,7 +143,7 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
-echo $updatebat" updated"
+
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b unused -m  RE_IMAGE_FLASH_UNUSED -s 0 "$updatesh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -171,7 +170,6 @@ echo $command
 exit 1
 fi
 
-echo $updatebat" updated"
 command=$cmd" "$stm_tool" flash --layout "$preprocess_bl2_file" -b slot1 -m  RE_IMAGE_FLASH_ADDRESS_NON_SECURE -s 0 "$bin2hexsh
 $command  >> $projectdir"/output.txt"
 ret=$?
@@ -180,3 +178,6 @@ echo "postbuild.sh failed"
 echo $command
 exit 1
 fi
+
+echo $updatesh" STM32 script updated"
+echo $regressionsh" STM32 script updated"

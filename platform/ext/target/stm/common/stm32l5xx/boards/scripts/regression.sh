@@ -17,7 +17,6 @@ sn_option=""
 if [ $# -eq 1 ]; then
 sn_option="sn=$1"
 fi
-PATH="/C/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/":$PATH
 stm32programmercli="STM32_Programmer_CLI"
 # remove write protection
 secbootadd0=0x180030

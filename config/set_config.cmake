@@ -40,6 +40,8 @@ endif()
 # Load profile config, setting options not already set
 if (TFM_PROFILE)
     include(config/profile/${TFM_PROFILE}.cmake)
+else()
+    include(config/profile/profile_medium.cmake)
 endif()
 
 # Load TF-M model specific default config
